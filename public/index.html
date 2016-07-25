@@ -1,0 +1,89 @@
+<!DOCTYPE>
+<html ng-app="myApp">
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+
+
+    <title>Actual Weather</title>
+</head>
+<body>
+
+<div id="map"></div>
+<script>
+
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 20
+        });
+    }
+
+</script>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhzSkLsyI6KDYXyvBW7iAE-DP83BTCl_A&callback=initMap"
+        async defer></script>
+
+
+<div class="container" ng-controller="AppCtrl">
+    <h1>Actual Weather</h1>
+
+
+
+    <table class="table">
+
+        <tbody>
+
+        <tr>
+            <td>Ort:</td>
+            <td>{{weather.city_name}}</td>
+        </tr>
+
+        <tr>
+            <td>Temperatur:</td>
+            <td>{{weather.temp | number:1}}°C</td>
+        </tr>
+
+        <tr>
+            <td>Wolken:</td>
+            <td>{{weather.clouds}}%</td>
+        </tr>
+
+        <tr>
+            <td>Regen:</td>
+            <td ng-if = "weather.rain == null">aktuell kein Regen</td>
+            <td ng-if = "weather.rain != null">ak</td>
+        </tr>
+
+        <tr>
+            <td>Sonnenaufgang:</td>
+            <td>{{(weather.sunrise*1000) | date:'HH:mm'}} Uhr</td>
+        </tr>
+
+        <tr>
+            <td>Sonnenuntergang:</td>
+            <td>{{(weather.sunset*1000) | date:'HH:mm'}} Uhr</td>
+        </tr>
+
+        </tbody>
+
+
+    </table>
+</div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+
+<script src="controllers/actWeather.js"></script>
+</body>
+
+</html>
